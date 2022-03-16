@@ -4,6 +4,7 @@ import Button from '../../src/components/Button';
 import Text from '../../src/components/Text';
 import styles from './SecondScreen.styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+import useTodo from '../context/useTodo';
 const colors = [
   {
     id: 1,
@@ -55,8 +56,15 @@ const colors = [
     color: 'orange',
   },
 ];
+
 const SecondScreen: React.FC = ({navigation}) => {
+  const [name, setname] = useState('');
   const [color, setcolor] = useState('blue');
+  const {addTodo} = useTodo();
+  const createTodo = () => {
+    addTodo(name, color);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -69,6 +77,7 @@ const SecondScreen: React.FC = ({navigation}) => {
 
         <TextInput
           style={styles.TextInput}
+          onChangeText={text => setname(text)}
           placeholder="List Name"
           placeholderTextColor={'black'}
         />
@@ -80,7 +89,9 @@ const SecondScreen: React.FC = ({navigation}) => {
             />
           ))}
         </View>
-        <Button style={[styles.button, {backgroundColor: color}]}>
+        <Button
+          style={[styles.button, {backgroundColor: color}]}
+          onPress={createTodo}>
           create
         </Button>
       </View>

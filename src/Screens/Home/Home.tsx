@@ -10,60 +10,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Home.styles';
 import Text from '../../components/Text';
 import Button from '../../components/Button';
-
-const TODOS = [
-  {
-    id: 1,
-    title: 'Firebase',
-    pending: 3,
-    completed: 1,
-    color: 'green',
-  },
-  {
-    id: 2,
-    title: 'Todo App server',
-    pending: 3,
-    completed: 1,
-    color: 'skyblue',
-  },
-  {
-    id: 3,
-    title: 'React Native',
-    pending: 3,
-    completed: 1,
-    color: 'blue',
-  },
-  {
-    id: 4,
-    title: 'Firebase',
-    pending: 3,
-    completed: 1,
-    color: 'indigo',
-  },
-  {
-    id: 5,
-    title: 'Firebase',
-    pending: 3,
-    completed: 1,
-    color: 'purple',
-  },
-  {
-    id: 6,
-    title: 'Firebase',
-    pending: 3,
-    completed: 1,
-    color: 'red',
-  },
-  {
-    id: 7,
-    title: 'Firebase',
-    pending: 3,
-    completed: 1,
-    color: 'orange',
-  },
-];
+import useTodo from '../../context/useTodo';
 
 const Home: React.FC<any> = ({navigation}) => {
+  const {todos} = useTodo();
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
@@ -96,13 +46,14 @@ const Home: React.FC<any> = ({navigation}) => {
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={TODOS}
+            data={todos}
             keyExtractor={item => `${item.id}`}
             renderItem={({item}) => (
               <TouchableOpacity
                 key={item.id}
                 activeOpacity={0.8}
-                style={[styles.item, {backgroundColor: item.color}]}>
+                style={[styles.item, {backgroundColor: item.color}]}
+                onPress={() => navigation.navigate('TodoTask')}>
                 <Text size={20} bold color="#FFF" numberOfLines={1}>
                   {item.title}
                 </Text>
