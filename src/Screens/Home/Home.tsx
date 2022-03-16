@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Home.styles';
-import Text from '../../Screens/Text';
-import Button from '../../Screens/Button';
+import Text from '../../components/Text';
+import Button from '../../components/Button';
 
 const TODOS = [
   {
